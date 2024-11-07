@@ -407,16 +407,17 @@ int ph_dct_imagehash(const char* file,ulong64 &hash){
 #ifdef HAVE_PTHREAD
 void *ph_image_thread(void *p)
 {
-        slice *s = (slice *)p;
-        for(int i = 0; i < s->n; ++i)
-        {
-                DP *dp = (DP *)s->hash_p[i];
+	slice *s = (slice *)p;
+	for(int i = 0; i < s->n; ++i)
+	{
+		DP *dp = (DP *)s->hash_p[i];
 		ulong64 hash;
 		int ret = ph_dct_imagehash(dp->id, hash);
-                dp->hash = (ulong64*)malloc(sizeof(hash));
+		dp->hash = (ulong64*)malloc(sizeof(hash));
 		memcpy(dp->hash, &hash, sizeof(hash));
-                dp->hash_length = 1;
-        }
+		dp->hash_length = 1;
+	}
+	return NULL;
 }
 
 DP** ph_dct_image_hashes(char *files[], int count, int threads)
