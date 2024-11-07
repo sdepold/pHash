@@ -417,6 +417,7 @@ void *ph_image_thread(void *p)
 		memcpy(dp->hash, &hash, sizeof(hash));
                 dp->hash_length = 1;
         }
+        return NULL;
 }
 
 DP** ph_dct_image_hashes(char *files[], int count, int threads)
